@@ -1,5 +1,6 @@
 stages:
   - build
+  - test
 
 build_job:
   stage: build
@@ -14,7 +15,6 @@ build_job:
   tags:
     - shared runner
 
-test:
   stage: test
   script: make test
 
