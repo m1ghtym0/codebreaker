@@ -4,9 +4,12 @@ LIBS += -lssl -lcrypto
 
 .PHONY: all clean
 
-all: md5-test
+all: md5-test sha256-test
 
 md5-test: md5-test.o ../../src/cracker/md5.o ../../src/cracker/md5.h
+	$(CC) -o $@ $^ $(LIBS)
+
+sha256-test: sha256-test.o ../../src/cracker/sha256.o ../../src/cracker/sha256.h
 	$(CC) -o $@ $^ $(LIBS)
 	
 %.o: %.c %.h
