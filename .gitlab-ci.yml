@@ -1,0 +1,17 @@
+stages:
+  - build
+
+build_job:
+  stage: build
+  image: "ubuntu:latest"
+  before_script:
+    - apt-get -y -qq update
+    - apt-get -y -qq install build-essential mpich mpich-doc libmpich-dev
+
+  script: make build
+  only:
+    - master
+  tags:
+    - pacl
+    - codebreaker
+
