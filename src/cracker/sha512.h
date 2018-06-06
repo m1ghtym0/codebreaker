@@ -1,5 +1,5 @@
-#ifndef SHA256_H
-#define SHA256_H
+#ifndef SHA512_H
+#define SHA512_H
 
 #include <openssl/sha.h>
     
