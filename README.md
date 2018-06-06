@@ -13,7 +13,7 @@ CodeBreaker Project for PACL 2018
     - Interface fuer finalen string ([0, 1, 2, 3], word-list)
     
 *   Hashing-Logik:
-    - Interface bauen
+    - Test interface
 
 *   Word-Liste:
     - Einlesen + Parsen
