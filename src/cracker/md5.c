@@ -4,7 +4,7 @@
 #include "md5.h"
 
 
-unsigned char *md5_hash(const void *data, unsigned long data_len, const void *salt, unsigned long salt_len, unsigned char *md) {
+unsigned char *md5_hash (const void *data, unsigned long data_len, const void *salt, unsigned long salt_len, unsigned char *md) {
 	MD5_CTX c;
    
     
@@ -25,7 +25,7 @@ unsigned char *md5_hash(const void *data, unsigned long data_len, const void *sa
 }
 
 
-char *md5_encode_hex(char *out, const char *in) {
+char *md5_encode_hex (char *out, const char *in) {
     int i; 
     
     for (i = 0; i < MD5_DIGEST_LENGTH; ++i) {

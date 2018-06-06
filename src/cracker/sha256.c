@@ -4,7 +4,7 @@
 #include "sha256.h"
 
 
-unsigned char *sha256_hash(const void *data, unsigned long data_len, const void *salt, unsigned long salt_len, unsigned char *md) {
+unsigned char *sha256_hash (const void *data, unsigned long data_len, const void *salt, unsigned long salt_len, unsigned char *md) {
 	SHA256_CTX c;
    
 	if (SHA256_Init(&c) != 1) {
@@ -24,7 +24,7 @@ unsigned char *sha256_hash(const void *data, unsigned long data_len, const void 
 }
 
 
-char *sha256_encode_hex(char *out, const char *in) {
+char *sha256_encode_hex (char *out, const char *in) {
     int i; 
     
     for (i = 0; i < SHA256_DIGEST_LENGTH; ++i) {
