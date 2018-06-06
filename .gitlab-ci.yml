@@ -12,6 +12,5 @@ build_job:
   only:
     - master
   tags:
-    - pacl
-    - codebreaker
+    - shared runner
 
