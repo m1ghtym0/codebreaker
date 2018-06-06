@@ -6,7 +6,7 @@ build_job:
   image: "ubuntu:latest"
   before_script:
     - apt-get -y -qq update
-    - apt-get -y -qq install build-essential mpich mpich-doc libmpich-dev
+    - apt-get -y -qq install build-essential mpich mpich-doc libmpich-dev libssl-dev
 
   script: make build
   only:
