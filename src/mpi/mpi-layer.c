@@ -1,5 +1,7 @@
 #include "mpi-layer.h"
 
+#define UNUSED(x)	((void)(x))
+
 int mpi_start (int argc, char* argv[]) {
 	int rank, size;
 
@@ -18,6 +20,6 @@ int mpi_start (int argc, char* argv[]) {
 }
 
 void node_logic (int rank) {
-	
+    UNUSED(rank);
 	return;
 }
