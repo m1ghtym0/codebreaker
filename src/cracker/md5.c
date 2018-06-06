@@ -4,13 +4,9 @@
 #include "md5.h"
 
 
-#define UNUSED(x)	((void)(x))
-
 unsigned char *md5_hash(const void *data, unsigned long data_len, const void *salt, unsigned long salt_len, unsigned char *md) {
 	MD5_CTX c;
    
-    UNUSED(salt);
-    UNUSED(salt_len);
     
 	if (MD5_Init(&c) != 1) {
 		return NULL;

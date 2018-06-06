@@ -4,14 +4,10 @@
 #include "sha512.h"
 
 
-#define UNUSED(x)	((void)(x))
 
 unsigned char *sha512_hash(const void *data, unsigned long data_len, const void *salt, unsigned long salt_len, unsigned char *md) {
 	SHA512_CTX c;
    
-    UNUSED(salt);
-    UNUSED(salt_len);
-    
 	if (SHA512_Init(&c) != 1) {
 		return NULL;
 	}

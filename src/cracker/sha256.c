@@ -4,14 +4,9 @@
 #include "sha256.h"
 
 
-#define UNUSED(x)	((void)(x))
-
 unsigned char *sha256_hash(const void *data, unsigned long data_len, const void *salt, unsigned long salt_len, unsigned char *md) {
 	SHA256_CTX c;
    
-    UNUSED(salt);
-    UNUSED(salt_len);
-    
 	if (SHA256_Init(&c) != 1) {
 		return NULL;
 	}
