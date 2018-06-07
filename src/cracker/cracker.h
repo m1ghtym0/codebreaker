@@ -13,9 +13,10 @@ typedef struct hash_ctx hash_ctx;
 
 /*
  * algo:
- *	- 0: md5
- *	- 1: sha256
- *	- 2: sha512
+ *	- 1: md5
+ *  - 2: blowfish (not implemented)
+ *	- 5: sha256
+ *	- 6: sha512
  */
 int set_hash_algo(hash_ctx *c, int algo);
 int check_pass (hash_ctx *c, char *pass, char *salt, char *hash);

@@ -7,17 +7,17 @@
 
 int set_hash_algo (hash_ctx *c, int algo) {
 	switch (algo) {
-		case 0:
+		case 1:
 			c->digest_len = MD5_DIGEST_LENGTH;
 			c->compute_hash = md5_hash;
 			c->encode_hash = md5_encode_hex;
 			return 0;
-		case 1:
+		case 5:
 			c->digest_len = SHA256_DIGEST_LENGTH;
 			c->compute_hash = sha256_hash;
 			c->encode_hash = sha256_encode_hex;
 			return 0;
-		case 2:
+		case 6:
 			c->digest_len = SHA512_DIGEST_LENGTH;
 			c->compute_hash = sha512_hash;
 			c->encode_hash = sha512_encode_hex;
