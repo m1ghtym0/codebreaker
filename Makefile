@@ -11,7 +11,7 @@ mpi:
 cracker:
 	$(MAKE) -C src/cracker
 
-test:
+test: build
 	$(MAKE) -C test
 	
 clean:
