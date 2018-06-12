@@ -44,3 +44,38 @@ int check_pass (hash_ctx *c, char *pass, char *salt, char *hash) {
 	}
 }
 
+hash_element *parse_passfile (vector *pass_file, int *size) {
+	int i, algo;
+	char *hash_type, *hash, *salt;
+	hash_element *hashes;
+	
+	if ((hashes = calloc(total_vector(pass_file), sizeof(hash_element))) == NULL) {
+		perror("calloc");
+		exit(EXIT_FAILURE);
+	}
+
+	for (i = 0; i < total_vector(pass_file); i++) {
+		hash_type = strtok(get_vector(pass_file, i), "$");
+		salt = strtok(NULL, "$");
+		hash = strtok(NULL, "$");
+
+		if (hash_type == NULL || hash == NULL) {
+			fprintf(stderr, "ERROR: Passfile has a bad format\nShould be: type$salt$hash\\n\n");
+			return NULL;
+		}
+		if (!strcmp(salt, " ")) {
+			salt = "";
+		}
+
+		algo = atoi(hash_type);
+		if (set_hash_algo(&hashes[i].ctx, algo) != 0) {
+			fprintf(stderr, "ERROR: Unsupported hash-algorithm\n");
+			return NULL;
+		}
+		hashes[i].salt = salt;
+		hashes[i].hash = hash;
+	}
+	*size = i;
+
+	return hashes;
+}
