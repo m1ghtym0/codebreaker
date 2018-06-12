@@ -8,7 +8,7 @@
 #include "../distribution/input/read_file.h"
 #include "../distribution/distribution.h"
 
-int mpi_start (int argc, char* argv[]) {
+int mpi_start (int argc, char* argv[], char *wlist, char *plist) {
 	int rank, size;
 
 	MPI_Init(&argc, &argv);      /* starts MPI */
@@ -16,7 +16,7 @@ int mpi_start (int argc, char* argv[]) {
 	MPI_Comm_size(MPI_COMM_WORLD, &size);        /* get number of processes */
 
 	printf("Process %d of %d: Hello!\n", rank, size);
-	node_logic(rank, size);
+	node_logic(rank, size, wlist, plist);
 
 	//TODO: Signal handler for soft abort
 	//MPI_Abort(MPI_COMM_WORLD, 0);
@@ -25,15 +25,20 @@ int mpi_start (int argc, char* argv[]) {
 	return 0;
 }
 
-void node_logic (int rank, int size) {
-	FILE *fp;
-	vector *words, words_dist;
+void node_logic (int rank, int size, char *wlist, char *plist) {
+	FILE *word_fp, *pass_fp;
+	vector *words, words_dist, *pass;
     size_t file_size;
 
-	fp = open_file("wordlist", &file_size);
-	words = index_file(fp, file_size);
+	word_fp = open_file(wlist, &file_size);
+	words = index_file(word_fp, file_size);
 	distribution(words, &words_dist, rank, size);
 
+	pass_fp = open_file(plist, &file_size);
+	pass = index_file(pass_fp, file_size);
+
+
 	//DEBUGGIN info
-	printf("Prozess %d hat %d Elemente.\n", rank, total_vector(&words_dist));
+	printf("Prozess %d hat %d Woerter.\n", rank, total_vector(&words_dist));
+	printf("Prozess %d hat %d Hashes.\n", rank, total_vector(pass));
 }
