@@ -16,7 +16,7 @@ int total_vector (vector* v) {
 void resize_vector (vector* v, int capacity) {
     char **items;
 
-	if ((items = realloc(v->items, sizeof(char*) * capacity)) != NULL)
+	if ((items = realloc(v->items, sizeof(char*) * capacity)) != NULL) {
 		v->items = items;
 		v->capacity = capacity;
 	} else {
@@ -35,7 +35,7 @@ void add_vector (vector* v, char* item) {
 	}
 
 	//store string in vector
-	if(v->capacity == v->total) {
+	if (v->capacity == v->total) {
 		resize_vector(v, v->capacity + 1);
 	}
 	v->items[v->total++] = item;
@@ -51,7 +51,7 @@ char* get_vector (vector* v, int index) {
 void free_vector (vector* v) {
 	int i;
 
-	for(i = 0; i < total_vector(v); i++) {
+	for (i = 0; i < total_vector(v); i++) {
 		free(get_vector(v, i));
 	}
 	free(v->items);
@@ -60,7 +60,7 @@ void free_vector (vector* v) {
 void print_vector(vector* v) {
 	int i;
 
-	for(i = 0; i < total_vector(v); i++) {
+	for (i = 0; i < total_vector(v); i++) {
 		printf("%s\n", get_vector(v, i));
 	}
 }

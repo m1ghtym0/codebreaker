@@ -3,7 +3,7 @@
 
 #include"vector.h"
 
-FILE* open_file(char *, size_t *);
-vector index_file (FILE *, size_t);
+FILE* open_file (char *file_name, size_t *size);
+vector *index_file (FILE* fp, size_t size);
 
 #endif

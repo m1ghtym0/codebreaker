@@ -16,7 +16,7 @@ void distribution(vector* v, vector* dist_vector, int rank, int size) {
 
 	start_index = (total_vector(v) / size) * rank;
 
-	if(rank == size - 1) {
+	if (rank == size - 1) {
 		//last process collects last elements
 		end_index = total_vector(v);
 	} else {
@@ -25,7 +25,7 @@ void distribution(vector* v, vector* dist_vector, int rank, int size) {
 
 	init_vector(dist_vector);
 
-	for(i = start_index; i < end_index; i++) {
+	for (i = start_index; i < end_index; i++) {
 		add_vector(dist_vector, get_vector(v, i));
 	}
 }
