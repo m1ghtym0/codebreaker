@@ -3,9 +3,9 @@ LDFLAGS += -lmpi
 CC = mpicc
 .PHONY: all clean
 
-all: main
+all: codebreaker
 
-main: 	distribution/distribution.o distribution/input/vector.o distribution/input/read_file.o mpi/mpi-layer.o main.o
+codebreaker: 	distribution/distribution.o distribution/input/vector.o distribution/input/read_file.o mpi/mpi-layer.o codebreaker.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 %.o: %.c %.h
@@ -13,3 +13,6 @@ main: 	distribution/distribution.o distribution/input/vector.o distribution/inpu
 
 clean:
 	rm -f *.o
+
+distclean: clean
+	rm -f codebreaker

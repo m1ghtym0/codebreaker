@@ -1,0 +1,6 @@
+host emmy-frontend
+   hostName emmy.rrze.fau.de
+   user pacl023h
+   port 22
+
+
