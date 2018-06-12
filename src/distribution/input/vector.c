@@ -14,18 +14,24 @@ int total_vector (vector* v) {
 }
 
 void resize_vector (vector* v, int capacity) {
-	char** items = realloc(v->items, sizeof(char*) * capacity);
-	if(items) {
+    char **items;
+
+	if ((items = realloc(v->items, sizeof(char*) * capacity)) != NULL)
 		v->items = items;
 		v->capacity = capacity;
+	} else {
+		perror("realloc");
+		exit(EXIT_FAILURE);
 	}
 }
 
 void add_vector (vector* v, char* item) {
+	size_t ln;
+
 	//remove \n from string
-	size_t ln = strlen(item)-1;
+	ln = strlen(item)-1;
 	if (item[ln] == '\n') {
-    		item[ln] = '\0';
+		item[ln] = '\0';
 	}
 
 	//store string in vector
@@ -36,21 +42,26 @@ void add_vector (vector* v, char* item) {
 }
 
 char* get_vector (vector* v, int index) {
-	if (index >= 0 && index < v->total)
+	if (index >= 0 && index < v->total) {
 		return v->items[index];
+	}
 	return NULL;
 }
 
 void free_vector (vector* v) {
 	int i;
-	for(i = 0; i < total_vector(v); i++)
+
+	for(i = 0; i < total_vector(v); i++) {
 		free(get_vector(v, i));
+	}
 	free(v->items);
 }
 
 void print_vector(vector* v) {
 	int i;
-        for(i = 0; i < total_vector(v); i++)
-                printf("%s\n", get_vector(v, i));
+
+	for(i = 0; i < total_vector(v); i++) {
+		printf("%s\n", get_vector(v, i));
+	}
 }
 
