@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "input/vector.h"
 #include "distribution.h"
 
 /*

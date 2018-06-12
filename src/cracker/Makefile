@@ -5,9 +5,11 @@ OBJ = $(SRC:.c=.o)
 
 all: cracker.a
 
-cracker.a: $(SRC)
-	$(CC) $(CPPFLAGS) -c $(CFLAGS) $(LDFLAGS) $^
+cracker.a: $(OBJ)
 	ar cr $@ $(OBJ)
+
+%.o: %.c %.h
+	$(CC) $(CPPFLAGS) -c $(CFLAGS) $(LDFLAGS) $^
 
 clean:
 	rm -f *.o *.a

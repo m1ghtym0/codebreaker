@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../../src/distribution/distribution.h"
-#include "../../src/distribution/input/read_file.h"
-#include "../../src/distribution/input/vector.h"
 
 #define NODES 5
 

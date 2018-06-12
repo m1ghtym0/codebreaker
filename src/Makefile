@@ -5,7 +5,7 @@ CC = mpicc
 
 all: codebreaker
 
-codebreaker: codebreaker.o mpi/mpi-layer.o distribution/distribution.a
+codebreaker: codebreaker.o mpi/mpi-layer.o distribution/distribution.o input/input.a
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 %.o: %.c %.h
