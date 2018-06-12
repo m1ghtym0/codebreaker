@@ -2,7 +2,7 @@
 
 build: codebreaker
 
-codebreaker: mpi cracker distribution input
+codebreaker: mpi input cracker distribution
 	$(MAKE) -C src
 
 mpi:
