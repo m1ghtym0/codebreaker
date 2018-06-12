@@ -22,19 +22,19 @@ FILE* open_file (char *file_name, size_t *size) {
 		perror("stat");
 	}
 	
-	size = statbuf.st_size;
+	*size = statbuf.st_size;
 	return fp;
 }
 
 vector *index_file (FILE* fp, size_t size) {
 	vector *v;
-	char *wordlist, word;
+	char *wordlist, *word;
 
 	if ((wordlist = calloc(size, 1)) == NULL) {
 		perror("calloc");
 	}
 
-	if ((wordlist = calloc(sizeof(vector), 1)) == NULL) {
+	if ((v = calloc(sizeof(vector), 1)) == NULL) {
 		perror("calloc");
 	}
 

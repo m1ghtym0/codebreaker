@@ -5,7 +5,7 @@ CC = mpicc
 
 all: main
 
-main: 	permutation/permutation.o permutation/input/vector.o permutation/input/read_file.o mpi/mpi-layer.o main.o
+main: 	distribution/distribution.o distribution/input/vector.o distribution/input/read_file.o mpi/mpi-layer.o main.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 %.o: %.c %.h
