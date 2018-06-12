@@ -22,4 +22,4 @@ cracker-test: cracker-test.o ../../src/cracker/cracker.a ../../src/cracker/crack
 	$(CC) $(CPPFLAGS) -c $(CFLAGS) $(LDFLAGS) -o $@ $<	$(LIBS)
 
 clean:
-	rm -f md5-test sha256-test sha512-test *.o
+	rm -f cracker-test md5-test sha256-test sha512-test *.o
