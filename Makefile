@@ -1,8 +1,8 @@
 .PHONY: build clean test
 
-build: main mpi cracker permutation
+build: codebreaker
 
-main:
+codebreaker: mpi cracker distribution
 	$(MAKE) -C src
 
 mpi:
@@ -11,9 +11,8 @@ mpi:
 cracker:
 	$(MAKE) -C src/cracker
 
-permutation:
-	$(MAKE) -C src/permutation
-	$(MAKE) -C src/permutation/input
+distribution:
+	$(MAKE) -C src/distribution
 
 
 test: build
@@ -23,5 +22,4 @@ clean:
 	$(MAKE) -C src clean
 	$(MAKE) -C src/mpi clean
 	$(MAKE) -C src/cracker clean
-	$(MAKE) -C src/permutation clean
-	$(MAKE) -C src/permutation/input clean
+	$(MAKE) -C src/distribution clean
