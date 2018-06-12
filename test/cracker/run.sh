@@ -16,3 +16,5 @@ set -v
 ./cracker-test 1 hello world fc5e038d38a57032085441e7fe7010b0
 ./cracker-test 5 hello world 936a185caaa266bb9cbe981e9e05cb78cd732b0b3280eb944412bb6f8f8f07af
 ./cracker-test 6 hello world 1594244d52f2d8c12b142bb61f47bc2eaf503d6d9ca8480cae9fcf112f66e4967dc5e8fa98285e36db8af1b8ffa8b84cb15e0fbcf836c3deb803c13f37659a60
+
+./cracker-test2 wordlist passlist
