@@ -3,9 +3,9 @@ LDFLAGS += -lmpi
 CC = mpicc
 .PHONY: all clean
 
-all: main
+all: codebreaker
 
-main: mpi/mpi-layer.o main.o
+codebreaker: mpi/mpi-layer.o codebreaker.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 %.o: %.c %.h
@@ -13,3 +13,6 @@ main: mpi/mpi-layer.o main.o
 
 clean:
 	rm -f *.o
+
+distclean: clean
+	rm -f codebreaker
