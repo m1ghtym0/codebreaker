@@ -15,7 +15,9 @@ clean:
 	make -C distribution clean
 	make -C cracker clean
 	make -C mpi clean
+	make -C input clean
 	rm -f *.o
+	rm -rf *.gch
 
 distclean: clean
 	rm -f codebreaker

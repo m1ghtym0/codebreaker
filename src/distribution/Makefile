@@ -7,5 +7,4 @@ all: distribution.o
 	$(CC) $(CPPFLAGS) -c $(CFLAGS) $(LDFLAGS) -o $@ $<
 
 clean:
-	make -C input clean
 	rm -f *.o
