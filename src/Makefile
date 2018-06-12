@@ -5,13 +5,16 @@ CC = mpicc
 
 all: codebreaker
 
-codebreaker: 	distribution/distribution.o distribution/input/vector.o distribution/input/read_file.o mpi/mpi-layer.o codebreaker.o
+codebreaker: codebreaker.o mpi/mpi-layer.o distribution/distribution.a
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 %.o: %.c %.h
 	$(CC) $(CPPFLAGS) -c $(CFLAGS) $(LDFLAGS) -o $@ $<
 
 clean:
+	make -C distribution clean
+	make -C cracker clean
+	make -C mpi clean
 	rm -f *.o
 
 distclean: clean
