@@ -2,3 +2,5 @@
 *.a
 codebreaker
 *.gch
+wordlist
+passlist
