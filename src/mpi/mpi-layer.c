@@ -49,7 +49,7 @@ void node_logic (int rank, int size, char *wlist, char *plist) {
 			}
 			if (check_pass (&hashes[h].ctx, get_vector(&words_dist, w), hashes[h].salt, hashes[h].hash)) {
 				hashes[h].done = 1;
-				printf("PID[%d]: (%s)%s == %s.\n", rank, hashes[h].salt, get_vector(&words_dist, w), hashes[h].hash);
+				printf("NODE[%d]: |%s|%s|%s|\n", rank, hashes[h].salt, get_vector(&words_dist, w), hashes[h].hash);
 			}
 		}
 	}
