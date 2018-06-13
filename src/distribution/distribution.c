@@ -12,24 +12,24 @@
 
 void distribution(vector* v, vector* dist_vector, int rank, int size) {
 	int i, start_index, end_index;
-
-	if(size >= total_vector(v)) {
-		start_index = rank;
-		end_index = rank + 1;
-	} else {
-		start_index = (total_vector(v) / size) * rank;
-
-		if (rank == size - 1) {
-			//last process collects last elements
-			end_index = total_vector(v);
-		} else {
-			end_index = start_index + (total_vector(v) / size);
-		}
-	}
-
 	init_vector(dist_vector);
 
-	for (i = start_index; i < end_index; i++) {
-		add_vector(dist_vector, get_vector(v, i));
+	if (rank < total_vector(v)) {
+		if(size >= total_vector(v)) {
+			add_vector(dist_vector, get_vector(v, rank));
+		} else {
+			start_index = (total_vector(v) / size) * rank;
+
+			if (rank == size - 1) {
+				//last process collects last elements
+				end_index = total_vector(v);
+			} else {
+				end_index = start_index + (total_vector(v) / size);
+			}
+
+			for (i = start_index; i < end_index; i++) {
+        	        	add_vector(dist_vector, get_vector(v, i));
+        		}
+		}
 	}
 }

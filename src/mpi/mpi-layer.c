@@ -56,5 +56,5 @@ void node_logic (int rank, int size, char *wlist, char *plist) {
 
 
 	//DEBUGGIN info
-	printf("Prozess %d hat %d Woerter.\n", rank, total_vector(&words_dist));
+	//printf("Prozess %d hat %d Woerter.\n", rank, total_vector(&words_dist));
 }
