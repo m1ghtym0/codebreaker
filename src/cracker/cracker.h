@@ -17,7 +17,6 @@ struct hash_element {
     hash_ctx ctx;
     char *salt;
     char *hash;
-    int done;
 };
 typedef struct hash_element hash_element;
 
