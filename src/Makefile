@@ -1,5 +1,5 @@
 CFLAGS += -std=c99 -pedantic -Wall -Werror -Wextra -D_FORTIFY_SOURCE=2 -O3 -fPIC -fstack-protector-all -pie -s
-LIBS += -lmpi
+LIBS += -lmpi -lcrypt
 #STATIC_LIBS += -lssl -lcrypto
 # This is an ugly trick so we don't have to write the annoying module file
 STATIC_LIBS += /usr/lib/x86_64-linux-gnu/libcrypto.a

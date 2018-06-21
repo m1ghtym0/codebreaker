@@ -5,8 +5,16 @@
 
 
 
-unsigned char *sha512_hash (const void *data, unsigned long data_len, const void *salt, unsigned long salt_len, unsigned char *md) {
+unsigned char *sha512_hash (const void *data, unsigned long data_len, const void *salt, unsigned long salt_len, size_t *len) {
 	SHA512_CTX c;
+	unsigned char *hash;
+	
+	 *len = SHA512_DIGEST_LENGTH;
+	
+	if ((hash = calloc(SHA512_DIGEST_LENGTH, sizeof(char))) == NULL) {
+		perror("calloc");
+		return NULL;
+	}
    
 	if (SHA512_Init(&c) != 1) {
 		return NULL;
@@ -17,19 +25,27 @@ unsigned char *sha512_hash (const void *data, unsigned long data_len, const void
 	if (SHA512_Update(&c, data, data_len) != 1) {
 		return NULL;
 	}
-	if (SHA512_Final(md, &c) != 1) {
+	if (SHA512_Final(hash, &c) != 1) {
         return NULL;
     }
-    return md;
+    return hash;
         
 }
 
 
-char *sha512_encode_hex (char *out, const char *in) {
+char *sha512_encode_hex (char *in, size_t *len) {
     int i; 
-    
+ 	char *encoded;
+	
+    *len = SHA512_DIGEST_LENGTH * 2;
+
+	if ((encoded = calloc(SHA512_DIGEST_LENGTH*2, sizeof(char))) == NULL) {
+		perror("calloc");
+		return NULL;
+	}
+   
     for (i = 0; i < SHA512_DIGEST_LENGTH; ++i) {
-        sprintf(&out[i*2], "%02x", (uint8_t) in[i]);
+        sprintf(&encoded[i*2], "%02x", (uint8_t) in[i]);
     }
-    return out;
+    return encoded;
 }
