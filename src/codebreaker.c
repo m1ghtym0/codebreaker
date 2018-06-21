@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
 		usage(argv);
 		exit(EXIT_FAILURE);
 	}
-	
+
 	if (format == NULL) {
 		format = "regular";
 	}

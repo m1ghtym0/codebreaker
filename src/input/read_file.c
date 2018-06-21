@@ -20,7 +20,7 @@ FILE* open_file (char *file_name, size_t *size) {
 	if (stat(file_name, &statbuf) == -1) {
 		perror("stat");
 	}
-	
+
 	*size = statbuf.st_size;
 	return fp;
 }
@@ -47,7 +47,7 @@ vector *index_file (FILE* fp, size_t size) {
 			exit(EXIT_FAILURE);
 		}
 	}
-	
+
 	word = strtok(wordlist, "\n");
 	while (word != NULL) {
 		add_vector(v, word);

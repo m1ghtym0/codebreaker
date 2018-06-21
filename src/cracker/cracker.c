@@ -40,7 +40,7 @@ int set_hash_algo (hash_ctx *c, int algo, char *hash_format) {
                 return 0;
             default:
                 return -1;
-        }       
+        }
     } else {
         return -1;
     }
@@ -50,16 +50,16 @@ int check_pass (hash_ctx *c, char *pass, char *salt, char *hash) {
     unsigned char *hashed;
     char *encoded;
     size_t len;
-    
+
     if ((hashed = c->compute_hash(pass, strlen(pass), salt, strlen(salt), &len)) == NULL) {
         return -1;
     }
-    
+
     if ((encoded = c->encode_hash((char *) hashed, &len)) == NULL) {
         free(hashed);
         return -1;
     }
-    
+
     if (!strncmp(encoded, hash, len)) {
         free(hashed);
         return 1;
@@ -74,7 +74,7 @@ hash_element *parse_passfile (vector *pass_file, char *hash_format, size_t *size
     ssize_t i;
     char *hash_type, *hash, *salt;
     hash_element *hashes;
-    
+
     if ((hashes = calloc(total_vector(pass_file), sizeof(hash_element))) == NULL) {
         perror("calloc");
         exit(EXIT_FAILURE);
