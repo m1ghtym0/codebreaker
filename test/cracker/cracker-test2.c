@@ -7,21 +7,22 @@
 
 
 int main (int argc, char *argv[]) {
-	char *wlist, *plist;
-	int w, h, hash_size;
+	char *wlist, *plist, *format;
+	int w;
 	FILE *words_fp, *pass_fp;
 	vector *words, *pass;
-	size_t file_size;
+	size_t file_size, hash_size, h;
 	hash_element *hashes;
 	int *done;
 
 	 
-	if (argc < 3) {
+	if (argc < 4) {
 		return EXIT_FAILURE;
 	}
 	
 	wlist = argv[1];
 	plist = argv[2];
+	format = argv[3];
    
 	
    
@@ -31,7 +32,7 @@ int main (int argc, char *argv[]) {
 	pass_fp = open_file(plist, &file_size);
 	pass = index_file(pass_fp, file_size);
 
-	if ((hashes = parse_passfile(pass, &hash_size)) == NULL ) {
+	if ((hashes = parse_passfile(pass, format, &hash_size)) == NULL ) {
 		return EXIT_FAILURE;
 	}
    

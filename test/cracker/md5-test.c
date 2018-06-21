@@ -6,8 +6,8 @@
 
 
 int main (int argc, char *argv[]) {
-    char md[MD5_DIGEST_LENGTH];  
-    char out[MD5_DIGEST_LENGTH*2];  
+    size_t len;
+    char *hashed, *encoded;
    
     if (argc < 4) {
         return EXIT_FAILURE;
@@ -17,15 +17,15 @@ int main (int argc, char *argv[]) {
     char *data = argv[2];
     char *hash = argv[3];
     
-    if (md5_hash(data, strlen(data), salt, strlen(salt), (unsigned char *) md) == NULL) {
+    if ((hashed = (char *) md5_hash(data, strlen(data), salt, strlen(salt), &len)) == NULL) {
         return EXIT_FAILURE;
     }
     
-    if (md5_encode_hex(out, md) == NULL) {
+    if ((encoded = md5_encode_hex(hashed, &len)) == NULL) {
         return EXIT_FAILURE;
     }
     
-    if (!strncmp(out, hash, MD5_DIGEST_LENGTH*2)) {
+    if (!strncmp(encoded, hash, len)) {
         return EXIT_SUCCESS;
     } else {
         return EXIT_FAILURE;
