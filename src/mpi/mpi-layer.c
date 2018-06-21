@@ -13,14 +13,14 @@
 #define ROOT 0
 #define DONE_MSG 1
 
-int mpi_start (int argc, char* argv[], char *wlist, char *plist) {
+int mpi_start (int argc, char* argv[], char *wlist, char *plist, char *hash_format) {
 	int rank, size;
 
 	MPI_Init(&argc, &argv);		 /* starts MPI */
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);		 /* get current process id */
 	MPI_Comm_size(MPI_COMM_WORLD, &size);		 /* get number of processes */
 
-	node_logic(rank, size, wlist, plist);
+	node_logic(rank, size, wlist, plist, hash_format);
 
 	//TODO: Signal handler for soft abort
 	//MPI_Abort(MPI_COMM_WORLD, 0);
@@ -29,11 +29,12 @@ int mpi_start (int argc, char* argv[], char *wlist, char *plist) {
 	return 0;
 }
 
-void node_logic (int rank, int size, char *wlist, char *plist) {
+void node_logic (int rank, int size, char *wlist, char *plist, char *hash_format) {
 	FILE *word_fp, *pass_fp;
 	vector *words, words_dist, *pass;
-	size_t file_size;
-	int hash_size, w, h, done_cnt;
+	size_t file_size, hash_size;
+    int w;
+	unsigned int h, done_cnt;
 	hash_element *hashes;
 	
 	MPI_Request request;
@@ -49,7 +50,7 @@ void node_logic (int rank, int size, char *wlist, char *plist) {
 	pass_fp = open_file(plist, &file_size);
 	pass = index_file(pass_fp, file_size);
 
-	if ((hashes = parse_passfile(pass, &hash_size)) == NULL ) {
+	if ((hashes = parse_passfile(pass, hash_format, &hash_size)) == NULL ) {
 		exit(EXIT_FAILURE);
 	}
    
