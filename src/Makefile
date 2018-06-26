@@ -9,7 +9,7 @@ CC = mpicc
 all: codebreaker
 
 #codebreaker: codebreaker.o mpi/mpi-layer.o distribution/distribution.a cracker/cracker.a input/input.a /usr/lib/x86_64-linux-gnu/libcrypto.a
-codebreaker: codebreaker.o mpi/mpi-layer.o distribution/distribution.a cracker/cracker.a input/input.a
+codebreaker: codebreaker.o mpi/mpi-layer.o distribution/distribution.a cracker/cracker.a input/input.a permutation/permutation.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS) $(STATIC_LIBS)
 
 %.o: %.c %.h
@@ -20,6 +20,7 @@ clean:
 	make -C cracker clean
 	make -C mpi clean
 	make -C input clean
+	make -C permutation clean
 	rm -f *.o
 	rm -rf *.gch
 
