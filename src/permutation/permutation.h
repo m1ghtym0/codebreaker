@@ -3,5 +3,5 @@
 
 #include "../../src/input/input.h"
 
-vector *permute (char*, vector*);
+vector *permute (char *fmt_str, vector *wordlist);
 #endif

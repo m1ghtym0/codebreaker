@@ -7,31 +7,29 @@
 
 #include "mpi-layer.h"
 #include "../input/input.h"
+#include "../permutation/permutation.h"
 #include "../distribution/distribution.h"
 #include "../cracker/cracker.h"
 
 #define ROOT 0
 #define DONE_MSG 1
 
-int mpi_start (int argc, char* argv[], char *wlist, char *plist, char *hash_format) {
+int mpi_start (int argc, char* argv[], char *wlist, char *plist, char *hash_format, char *fmt_str) {
 	int rank, size;
 
 	MPI_Init(&argc, &argv);		 /* starts MPI */
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);		 /* get current process id */
 	MPI_Comm_size(MPI_COMM_WORLD, &size);		 /* get number of processes */
 
-	node_logic(rank, size, wlist, plist, hash_format);
-
-	//TODO: Signal handler for soft abort
-	//MPI_Abort(MPI_COMM_WORLD, 0);
+	node_logic(rank, size, wlist, plist, hash_format, fmt_str);
 
 	MPI_Finalize();
 	return 0;
 }
 
-void node_logic (int rank, int size, char *wlist, char *plist, char *hash_format) {
+void node_logic (int rank, int size, char *wlist, char *plist, char *hash_format, char *fmt_str) {
 	FILE *word_fp, *pass_fp;
-	vector *words, words_dist, *pass;
+	vector *words, words_dist, *pass, *final;
 	size_t file_size, hash_size;
 	int w;
 	unsigned int h, done_cnt;
@@ -45,7 +43,13 @@ void node_logic (int rank, int size, char *wlist, char *plist, char *hash_format
 
 	word_fp = open_file(wlist, &file_size);
 	words = index_file(word_fp, file_size);
-	distribution(words, &words_dist, rank, size);
+
+    if (fmt_str) {
+        final = permute(fmt_str, words);
+    } else {
+        final = words;
+    }
+	distribution(final, &words_dist, rank, size);
 
 	pass_fp = open_file(plist, &file_size);
 	pass = index_file(pass_fp, file_size);

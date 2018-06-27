@@ -21,7 +21,7 @@ vector *expand_int (vector *v, char *str) {
 vector *expand_str (vector *v, char *str, vector *wordlist) {
 	int i;
 	char *new_str;
-	
+
 	for (i = 0; i < total_vector(wordlist); i++) {
 		if (asprintf(&new_str, "%s%s", str, get_vector(wordlist, i)) < 0) {
 			perror("asprintf");
@@ -34,7 +34,7 @@ vector *expand_str (vector *v, char *str, vector *wordlist) {
 
 vector *expand_chr (vector *v, char *str, char c) {
 	char *new_str;
-	
+
 	if (asprintf(&new_str, "%s%c", str, c) < 0) {
 		perror("asprintf");
 		return NULL;
@@ -48,7 +48,7 @@ vector *rec_perm (vector *in, char *fmt, vector *wordlist) {
 	int i;
 	vector *out, *ret;
 	char *new_fmt;
-	
+
 	if (!strlen(fmt)) {
 		return in;
 	}
@@ -57,9 +57,9 @@ vector *rec_perm (vector *in, char *fmt, vector *wordlist) {
 		perror("calloc");
 		return NULL;
 	}
-	
+
 	init_vector(out);
-	
+
 	if (strlen(fmt) == 1 || fmt[0] != '%' || (fmt[1] != 's' && fmt[1] != 'd')) {
 		for (i = 0; i < total_vector(in); i++) {
 			if ((ret = expand_chr(out, get_vector(in, i), fmt[0])) == NULL) {
@@ -72,7 +72,7 @@ vector *rec_perm (vector *in, char *fmt, vector *wordlist) {
 			if ((ret = expand_int(out, get_vector(in, i))) == NULL) {
 				return NULL;
 			}
-		}	
+		}
 		new_fmt = fmt + 2;
 	} else if (fmt[1] == 's') {
 		for (i = 0; i < total_vector(in); i++) {
