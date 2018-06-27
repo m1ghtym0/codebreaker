@@ -1,130 +1,154 @@
-#include <stdlib.h>
+#define _GNU_SOURCE
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "permutation.h"
 
-//void permute (char* string_format, vector* wordlist) {
-void permute (char* string_format) {
-	int num_of_strings = count_string("%s", string_format);
-	int num_of_numbers = count_string("%d", string_format);
-	int num_all = num_of_strings + num_of_numbers;
-	int len = (int) strlen(string_format);
+int expand_int(perm_list *list, char *str) {
 	int i;
-	int counter = 0;
-	char string_structure[num_all];
+	perm_list *cur, *next;
 
+	cur = list;
 
+	for (i = 0; i < 9; i++) {
+		if ((next = calloc(1, sizeof(perm_list))) == NULL) {
+			perror("calloc");
+			return EXIT_FAILURE;
+		}
+		next->next = NULL;
+		cur->next = next;
+		cur = next;
 
-//////////////START WHY????????
-vector* v;
-init_vector(v);
-add_vector(v, "f");
-print_vector(v);
-
-
-
-//////////////END
-
-
-//	vector** vector_group = NULL;
-
-	//Store the sequence of occured letter/string in array
-	for (i = 0; i < len; i++){
-		if(string_format[i] == '%' && ((i + 1) < len) ) {
-
-//			vector* v;
-//			init_vector(v);
-//			vector_group = realloc(vector_group, sizeof(v));
-
-			if(string_format[i + 1] == 's') {
-//				store_numbers_in_vector(v);
-
-			} else if(string_format[i + 1] == 'd') {
-//				store_numbers_in_vector(v);
-//				store_words_in_vector(v, wordlist);
-			} else {
-//				free_vector(v);
-//				free(vector_group);
-			}
-
-
-			string_structure[counter] = string_format[i + 1];
-			counter++;
+		if (asprintf(&cur->str, "%s%d", str, i) < 0) {
+			perror("asprintf");
+			return EXIT_FAILURE;
 		}
 	}
-
-	//START: Debug Print
-	printf("strings: %d and numbers: %d\n",
-                num_of_strings, num_of_numbers);
-
-	for(i = 0; i < num_all; i++)
-		printf("%c, ", string_structure[i]);
-	printf("\n");
-
-	//print_vector(wordlist);
-	//END: Debug Print
-
-//	for(i = 0; i < 3; i++)
-//		print_vector(vector_group[i]);
-
+	return EXIT_SUCCESS;
 }
 
-void store_numbers_in_vector(vector* v) {
+int expand_str(perm_list *list, char *str, vector *wordlist) {
 	int i;
-	char* str=NULL;
-	for(i = 0; i < 10; i++) {
-		sprintf(str, "%d", i);
-		add_vector(v, str);
+	perm_list *cur, *next;
+
+	cur = list;
+	for (i = 0; i < total_vector(wordlist); i++) {
+		
+		if ((next = calloc(1, sizeof(perm_list))) == NULL) {
+			perror("calloc");
+			return EXIT_FAILURE;
+		}
+		next->next = NULL;
+		cur->next = next;
+		cur = next;
+
+		if (asprintf(&cur->str, "%s%s", str, get_vector(wordlist, i)) < 0) {
+			perror("asprintf");
+			return EXIT_FAILURE;
+		}
 	}
+	return EXIT_SUCCESS;
 }
 
-void store_words_in_vector(vector* v, vector* words) {
-	int i;
-	for(i = 0; i < total_vector(words); i++)
-		add_vector(v, get_vector(words, i));
-}
+int expand_chr(perm_list *list, char *str, char c) {
+	perm_list *next;
 
-int count_string (char* string_to_find, char* string) {
-	int count = 0;
-	char * tmp = string;
-
-	while( (tmp = strstr(tmp, string_to_find)) != NULL ) {
-		count++;
-		tmp++;
+	if ((next = calloc(1, sizeof(perm_list))) == NULL) {
+		perror("calloc");
+		return EXIT_FAILURE;
 	}
+	next->next = NULL;
+	list->next = next;
 
-	return count;
-}
-/*
-void rec_perm (int all_num, int pos, vector v, 
-char* word_structure
-
-
-) {
-	if(all_num == pos) {
-		print_vector(&v);
-		return;
+	if (asprintf(&next->str, "%s%c", str, c) < 0) {
+		perror("asprintf");
+		return EXIT_FAILURE;
 	}
-
-	int k;
-	//TODO 2 to number of strings or numbers=10
-	for(k = 0; k < ; k++) {
-		rec_perm(all_num, pos + 1, v + )
-	}
+	return EXIT_SUCCESS;
 }
 
 
-*/
+perm_list *rec_perm (perm_list *list, char *fmt, vector *wordlist) {
+	perm_list *cur, *prev, *new_list;
+	char *new_fmt;
 
-
-/*
-char* concat_words_from_vector(vector* v) {
-	int i;
-	char* string;
-	for(i = 0; i < total_vector(v); i++) {
-		concat(string, get_vector(v, i));
+	if (!strlen(fmt)) {
+		return list;
 	}
 
-	return string;
+	if ((new_list = calloc(1, sizeof(perm_list))) == NULL) {
+		perror("calloc");
+		return NULL;
+	}
+	new_list->next = NULL;
+
+	if (strlen(fmt) == 1 || fmt[0] != '%' || (fmt[1] != 's' && fmt[1] != 'd')) {
+		cur = list;
+		while  (cur) {
+			if (expand_chr(new_list, cur->str, fmt[1]) != EXIT_SUCCESS) {
+				return NULL;
+			}
+			prev = cur;
+			cur = cur->next;
+			free(prev->str);
+			free(prev);
+		}
+		new_fmt = fmt + 1;
+	} else if (fmt[1] == 'd') {
+		cur = list;
+		while  (cur) {
+			if (expand_int(new_list, cur->str) != EXIT_SUCCESS) {
+				return NULL;
+			}
+			prev = cur;
+			cur = cur->next;
+			free(prev->str);
+			free(prev);
+		}	
+		new_fmt = fmt + 2;
+	} else if (fmt[1] == 's') {
+		cur = list;
+		while  (cur) {
+			if (expand_str(new_list, cur->str, wordlist) != EXIT_SUCCESS) {
+				return NULL;
+			}
+			prev = cur;
+			cur = cur->next;
+			free(prev->str);
+			free(prev);
+		}
+		new_fmt = fmt + 2;
+	} else {
+		/* This should never happen! */
+		return NULL;
+	}
+	return rec_perm(new_list, new_fmt, wordlist);
+
 }
-*/
+
+vector *permute (char* fmt, vector *wordlist) {
+	perm_list *cur, *prev;
+	vector *perm_words;
+
+	if ((perm_words = calloc(1, sizeof(vector))) == NULL) {
+		perror("calloc");
+		return NULL;
+	}
+	init_vector(perm_words);
+	
+	if ((cur = calloc(1, sizeof(perm_list))) == NULL) {
+		perror("calloc");
+		return NULL;
+	}
+
+	cur = rec_perm(cur, fmt, wordlist);
+
+	while (cur) {
+		add_vector(perm_words, cur->str);
+		prev = cur;
+		cur = cur->next;
+		free(prev->str);
+		free(prev);
+	}
+	return perm_words;
+}
