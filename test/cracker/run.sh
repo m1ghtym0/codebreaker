@@ -26,3 +26,4 @@ set -v
 
 ./cracker-test2 wordlist passlist regular
 ./cracker-test2 wordlist passlist_crypt linux-crypt
+./cracker-test2 wordlist_perm passlist_perm linux-crypt "%s%s%d%d"

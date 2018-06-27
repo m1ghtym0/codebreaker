@@ -20,7 +20,7 @@ linux_crypt-test: linux_crypt-test.o ../../src/cracker/linux_crypt.o ../../src/c
 cracker-test: cracker-test.o ../../src/cracker/cracker.a ../../src/input/input.a ../../src/cracker/cracker.h
 	$(CC) -o $@ $^ $(LIBS)
 
-cracker-test2: cracker-test2.o ../../src/cracker/cracker.a ../../src/input/input.a ../../src/cracker/cracker.h
+cracker-test2: cracker-test2.o ../../src/cracker/cracker.a ../../src/permutation/permutation.a ../../src/input/input.a ../../src/cracker/cracker.h
 	$(CC) -o $@ $^ $(LIBS)
 
 %.o: %.c %.h
