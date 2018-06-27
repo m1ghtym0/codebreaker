@@ -29,11 +29,11 @@ vector *index_file (FILE* fp, size_t size) {
 	vector *v;
 	char *wordlist, *word;
 
-	if ((wordlist = calloc(size, 1)) == NULL) {
+	if ((wordlist = calloc(1, size+1)) == NULL) {
 		perror("calloc");
 	}
 
-	if ((v = calloc(sizeof(vector), 1)) == NULL) {
+	if ((v = calloc(1, sizeof(vector))) == NULL) {
 		perror("calloc");
 	}
 

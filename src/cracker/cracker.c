@@ -56,15 +56,12 @@ int check_pass (hash_ctx *c, char *pass, char *salt, char *hash) {
     }
 
     if ((encoded = c->encode_hash((char *) hashed, &len)) == NULL) {
-        free(hashed);
         return -1;
     }
 
     if (!strncmp(encoded, hash, len)) {
-        free(hashed);
         return 1;
     } else {
-        free(hashed);
         return 0;
     }
 }
