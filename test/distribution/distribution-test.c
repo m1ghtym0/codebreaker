@@ -22,7 +22,7 @@ int main (int argc, char *argv[]) {
 	fp = open_file(wordlist, &size);
 
 	words = index_file(fp, size);
-	
+
 
 	for (i = 0; i < NODES; i++) {
 		distribution(words, &dist_words, i, NODES);
