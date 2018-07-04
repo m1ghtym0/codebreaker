@@ -7,6 +7,6 @@ fi
 
 ./ssh/upload-bin.sh
 scp -r torque/* emmy-frontend:
-scp "$1" emmy-frontend:
-scp "$2" emmy-frontend:
+scp "$1" emmy-frontend:wordlist
+scp "$2" emmy-frontend:passlist
 
