@@ -10,7 +10,7 @@ if len(sys.argv) < 3:
 with open(sys.argv[1], "r") as f:
     raw = f.read()
 
-start, filtered, end = re.findall(r"End of prologue: \w+ \w+ (\d+ \d+:\d+:\d+)([\n\w\W\d\D\s\S]+)Starting epilogue... \w+ \w+ (\d+ \d+:\d+:\d+)", raw, re.MULTILINE)[0]
+start, filtered, end = re.findall(r"End of prologue:\s+\w+\s+\w+\s+(\d+ \d+:\d+:\d+)\w+\s+[\w\d\s]+\n([\n\w\W\d\D\s\S]+)Starting epilogue...\s+\w+\s+\w+\s+(\d+ \d+:\d+:\d+)", raw, re.MULTILINE)[0]
 
 s_day, s_time = start.split(' ')
 s_day = int(s_day)
