@@ -24,7 +24,7 @@ time_diff = (e_day-s_day)*24*3600 + (e_hour-s_hour)*3600 + (e_min-s_min)*60 + (e
 
 result = ''
 total = 0
-for line in filtered.split('\n')[1:-1]:
+for line in filtered.split('\n'):
     try:
         salt, pwd, _hash = re.findall(r"NODE\[\d+\]: \|(.*)\|(.*)\|(.*)\|", line)[0]
     except IndexError:

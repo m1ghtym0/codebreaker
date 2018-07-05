@@ -5,7 +5,8 @@ if [ $# -lt 4 ]; then
     exit 1
 fi
 
-head -"$2" "$1" |
+cat "$1" | shuf | head -n "$2" |
 while read p; do
-   ./mkpasswd.sh "$3" "$p" "GENENERATED" >> "$4"
+    echo "$p"
+    ./mkpasswd.sh "$3" "$p.9" "EVAL" >> "$4"
 done 
