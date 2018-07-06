@@ -25,7 +25,7 @@ cp ${PBS_O_WORKDIR}/passlist .
 module load openmpi/2.0.1-intel16.0
 
 # run
-mpirun ${HOME}/bin/codebreaker -w wordlist -p passlist -m "%s.%d"
+mpirun ${HOME}/bin/codebreaker -w wordlist -p passlist -m "%s.%d%d"
 
 # save output on parallel file system
 #mkdir -p ${FASTTMP}/output/$PBS_JOBID

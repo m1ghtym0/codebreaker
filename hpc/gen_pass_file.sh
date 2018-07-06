@@ -8,5 +8,5 @@ fi
 cat "$1" | shuf | head -n "$2" |
 while read p; do
     echo "$p"
-    ./mkpasswd.sh "$3" "$p.9" "EVAL" >> "$4"
+    ./mkpasswd.sh "$3" "$p.9999" "EVAL" >> "$4"
 done 
