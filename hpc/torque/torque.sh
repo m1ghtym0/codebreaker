@@ -1,7 +1,7 @@
 #!/bin/bash -l
 #
 # allocate 20 nodes (168 CPUs) for 6 hours
-#PBS -l nodes=8:ppn=40,walltime=01:00:00
+#PBS -l nodes=1:ppn=40,walltime=01:00:00
 #
 # job name 
 #PBS -N codebreaker_42

@@ -3,7 +3,7 @@
 rm codebreaker.out codebreaker.err
 
 echo -n "Starting codebreaker..."
-qsub -l nodes=8:ppn=40 -M moritz.eckert@fau.de torque.sh > job.id
+qsub -l nodes=8:ppn=40 torque.sh > job.id
 
 stat='Q'
 while [ $stat = "Q" ];
