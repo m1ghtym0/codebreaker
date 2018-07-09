@@ -29,7 +29,7 @@ $ALGO$SALT$HASH
 MD5(codebreaker): $1$saltsalt$61f4bd2a6a2d9ce9a9c079f2317d46e2
 MD5-crypt(codebreaker): $1$saltsalt$.Xn8ZFEBDl5srzZcZHqep.
 SHA256(codebreaker): $5$saltsalt$f96762a55b125f8c0bcffff37c0d55e21716cee74592f0c216265733ce617e9c
-SHA512(codebreaker): $5$saltsalt$3268ade7fbb34a232e7c486da0d2ec76d782c62494aab28dbf08568c24e21ca6321cefbebff323cc7f253a50d7370f34eaa030e30381dcd778eaef856ee59482
+SHA512(codebreaker): $6$saltsalt$3268ade7fbb34a232e7c486da0d2ec76d782c62494aab28dbf08568c24e21ca6321cefbebff323cc7f253a50d7370f34eaa030e30381dcd778eaef856ee59482
 ```
 
 ## Modes
