@@ -35,7 +35,9 @@ SHA512(codebreaker): $5$saltsalt$3268ade7fbb34a232e7c486da0d2ec76d782c62494aab28
 ## Modes
 
 *   Wordlist only
-*   Wordlist + Format-String: `%s!_%s?%d.%d"
+*   Wordlist + Format-String:
+    -   Supported format specifiers: `%s` + `%d`
+    -   Example: `%s!_%s?%d.%d"
 
 # Build
 
