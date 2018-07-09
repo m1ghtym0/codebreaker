@@ -5,8 +5,10 @@ if [ $# -lt 4 ]; then
     exit 1
 fi
 
+MYDIR="$(dirname "$(realpath "$0")")"
+
 cat "$1" | shuf | head -n "$2" |
 while read p; do
     echo "$p"
-    ./mkpasswd.sh "$3" "$p.9999" "EVAL" >> "$4"
+    $MYDIR/mkpasswd.sh "$3" "$p" "SALT" >> "$4"
 done 
