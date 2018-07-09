@@ -1,9 +1,5 @@
-CodeBreaker Project for PACL 2018
-----
-
-[![pipeline status](https://gitlab.cs.fau.de/en63uroj/CodeBreaker/badges/master/pipeline.svg)](https://gitlab.cs.fau.de/en63uroj/CodeBreaker/commits/master)
-
 # CodeBreaker
+[![pipeline status](https://gitlab.cs.fau.de/en63uroj/CodeBreaker/badges/master/pipeline.svg)](https://gitlab.cs.fau.de/en63uroj/CodeBreaker/commits/master)
 
 CodeBreaker is a very simple Password Cracker that uses MPI to run parallel on HPCs.
 
